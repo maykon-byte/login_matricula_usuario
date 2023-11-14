@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{%block 'titulo'%}Matrícula{% endblock %}
+
+{% block 'botão' %}
+<a href= "{% url 'sair' %}" class= 'btn btn-danger btn-lg'>Sair</a>
+{% endblock 'botão' %}
+
+{% block 'conteudo' %}
+<div class= 'container'>
+    <img src ={%static 'img/matricula.png'%} title "matricula.png">
+    <br>
+    {% if messages %}
+        {% for i in messages %}
+            <div class = 'alert {{i.tags}}' role = 'alert'>
+                {{i}}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class='row'>
+        <div class='col-md-3'>
+        </div>
+
+        <div class 'col-md'>
+            <h1>Faça Sua Matrícula.<h1/>
+            <form method = 'POST' action = '{% url "valida_matricula" %}'>{% csrf_token %}
+                <input name= 'nome' type = 'text' placeholder = 'nome...'>
+                <input name= 'sobrenome' type = 'text' placeholder = 'sobrenome...'>
+                <input name= 'email' type = 'email' placeholder = 'email...'>
+                <input type = 'submit'>
+            <form/>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
